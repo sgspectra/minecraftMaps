@@ -1,0 +1,69 @@
+<h3>Starting Coordinates</h3>
+<p>Enter the coordinates of where you want the map to be centered.</p>
+
+X: <input type="text" value="0" name="x" id="x"/>
+<br/>
+Z: <input type="text" value="0" name="z" id="z"/>
+<br/><br/>
+
+<h3>Zoom Level</h3>
+<p>Enter the zoom level you want every map to be at.</p>
+<select name="zoom-level" id="zoom">
+    <option value="128">0 (128x128)</option>
+    <option value="256">1 (256x256)</option>
+    <option value="512" selected="selected">2 (512x512)</option>
+    <option value="1024">3 (1024x1024)</option>
+    <option value="2048">4 (2048x2048)</option>
+</select>
+<br/>
+
+<h3>Dimensions</h3>
+Rows: <input type="text" value="3" name="rows" id="row"/>
+<br/>
+Columns: <input type="text" value="3" name="columns" id="col"/>
+<br/><br/>
+
+<script>
+function tableMaths()
+{
+	//These two values are the center coordinates of the middle map, Origin X & Z
+	var orgX = document.getElementById('x').value;
+	var orgZ = document.getElementById('z').value;
+	//These variables will hold the number of rows and columns desired in the spreadsheet
+	var rows = document.getElementById('row').value;
+	var cols = document.getElementById('col').value;
+	//Variable to hold zoom value
+	var z = document.getElementById('zoom');
+	var zoomVal = z.options[z.selectedIndex].value;
+	//These variables will calculate the center cell of the table
+	//Currently only set up to work with ODD NUMBERS OF ROWS AND COLUMNS
+	var midRow = (rows-1)/2
+	var midCol = (col-1)/2
+	//theader,tbody, and tfooter will be used to build different parts of the table, and be written to the document at the end of the function
+	var theader = '<table border="1">\n';
+	var tbody = '';
+	var tfooter = '</table>';
+	//i and j will be used in for loops to build the table
+	//interms of coordinates (i,j) 0,0 will represent the top-left corner of the table
+	for (var i=0; i<rows; i++)
+	{
+		tbody += '<tr>';
+		for (var j=0; j<cols; j++)
+		{
+			//rowsToMid and colsToMid are variable set up to determine how many multiples of the zoom level need to be applied to a cell
+			var rowsToMid = (midRow - i);
+			var colsToMid = (midCol - j);
+		
+			//entering as table data
+			tbody += '<td>';
+			tbody += 'X: ' + ((rowsToMid*zoom)+orgX) + ', ' + 'Z: ' + ((colsToMid*zoom)+orgZ);
+			tbody += '</td>';		
+		}
+	
+	}
+	//Finally the 3 parts of the table must be written into the document
+	document.write(theader + tbody + tfooter);
+}
+</script>
+
+<button onclick="tableMaths()">Generate Table!</button>
