@@ -1,0 +1,71 @@
+<h3>Starting Coordinates</h3>
+<p>Enter the coordinates of where you want the map to be centered.</p>
+
+X: <input type="text" value="0" name="x" id="x"/>
+<br/>
+Z: <input type="text" value="0" name="z" id="z"/>
+<br/><br/>
+
+<h3>Zoom Level</h3>
+<p>Enter the zoom level you want every map to be at.</p>
+<select name="zoom-level" id="zoom">
+    <option value="0">0 (128x128)</option>
+    <option value="1">1 (256x256)</option>
+    <option value="2" selected="selected">2 (512x512)</option>
+    <option value="3">3 (1024x1024)</option>
+    <option value="4">4 (2048x2048)</option>
+</select>
+<br/>
+
+<h3>Dimensions</h3>
+Rows: <input type="text" value="3" name="rows" id="row"/>
+<br/>
+Columns: <input type="text" value="3" name="columns" id="col"/>
+<br/><br/>
+
+<a href="#" class="submit">Calculate</a>
+<br/><br/>
+
+<!-- This is the bit I am working on atm -->
+<script>
+//To display some basic info for confirmation
+function basicInfo()
+{
+	var x = document.getElementById("x").value;
+	var z = document.getElementById("z").value;
+	document.write('<p>Your Map Centre: ' + x + ',' + z + '</p>');
+	document.write('<br/>');
+	var zoom = document.getElementById("zoom");
+	var zoomLevel = zoom.options[zoom.selectedIndex].value;
+	document.write('<p>Zoom Level: ' + zoomLevel + '</p>');
+}
+//This function will be used to generate the table
+function generateTable()
+{
+	var rows = document.getElementById('row').value;
+	var cols = document.getElementById('col').value;
+	var theader = '<table border='1'>\n';
+	var tbody = '';
+	
+	for (var i=0; i<rows; i++)
+	{
+		tbody += '<tr>';
+		for (var j=-; j<cols; j++)
+		{
+			tbody += '<td>';
+			//maths will have to occur below to calculate cell values
+			tbody += 'Cell' + i + ',' + j;
+			tbody += '</td>';
+		}
+		tbody += '</tr>\n';
+	}
+	var tfooter = '</table>';
+	document.write(theader + tbody + tfooter);
+}
+</script>
+
+<button onclick="basicInfo()">Calculate</button>
+<br/>
+<button onclick="generateTable()">Table</button>
+
+<div class="results"></div>
