@@ -34,17 +34,15 @@ function basicInfo()
 	var x = document.getElementById("x").value;
 	var z = document.getElementById("z").value;
 	document.write('<p>Your Map Centre: ' + x + ',' + z + '</p>');
-	document.write('<br/>');
-	var zoom = document.getElementById("zoom");
-	var zoomLevel = zoom.options[zoom.selectedIndex].value;
-	document.write('<p>Zoom Level: ' + zoomLevel + '</p>');
 }
+</script>
+<script>
 //This function will be used to generate the table
 function generateTable()
 {
 	var rows = document.getElementById('row').value;
 	var cols = document.getElementById('col').value;
-	var theader = '<table border='1'>\n';
+	var theader = '<table border="1">\n';
 	var tbody = '';
 	
 	for (var i=0; i<rows; i++)
