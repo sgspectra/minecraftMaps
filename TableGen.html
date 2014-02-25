@@ -27,18 +27,18 @@ Columns: <input type="text" value="3" name="columns" id="col"/>
 function tableMaths()
 {
 	//These two values are the center coordinates of the middle map, Origin X & Z
-	var orgX = document.getElementById('x').value;
-	var orgZ = document.getElementById('z').value;
+	var orgX = parseInt(document.getElementById('x').value);
+	var orgZ = parseInt(document.getElementById('z').value);
 	//These variables will hold the number of rows and columns desired in the spreadsheet
-	var rows = document.getElementById('row').value;
-	var cols = document.getElementById('col').value;
+	var rows = parseInt(document.getElementById('row').value);
+	var cols = parseInt(document.getElementById('col').value);
 	//Variable to hold zoom value
 	var z = document.getElementById('zoom');
-	var zoomVal = z.options[z.selectedIndex].value;
+	var zoomVal = parseInt(z.options[z.selectedIndex].value);
 	//These variables will calculate the center cell of the table
 	//Currently only set up to work with ODD NUMBERS OF ROWS AND COLUMNS
-	var midRow = (rows-1)/2
-	var midCol = (col-1)/2
+	var midRow = (rows-1)/2;
+	var midCol = (cols-1)/2;
 	//theader,tbody, and tfooter will be used to build different parts of the table, and be written to the document at the end of the function
 	var theader = '<table border="1">\n';
 	var tbody = '';
@@ -56,7 +56,7 @@ function tableMaths()
 		
 			//entering as table data
 			tbody += '<td>';
-			tbody += 'X: ' + ((rowsToMid*zoomVal)+orgX) + ', ' + 'Z: ' + ((colsToMid*zoomVal)+orgZ);
+			tbody += 'X: ' + ((colsToMid*(-zoomVal))+orgZ) + ', ' + 'Z: ' + ((rowsToMid*(zoomVal))+orgX);
 			tbody += '</td>';		
 		}
 	
@@ -67,3 +67,6 @@ function tableMaths()
 </script>
 
 <button onclick="tableMaths()">Generate Table!</button>
+
+
+<!-- NEED TO ADJUST THE VALUES SO THAT THE TABLE GENERATES CORRECTLY (-x,+z)  (0x,+z)  (+x,+z) ACROSS THE TOP ROW for 3x3-->
